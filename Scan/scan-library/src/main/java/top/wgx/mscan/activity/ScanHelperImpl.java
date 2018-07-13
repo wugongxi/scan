@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.widget.Toast;
 
 
@@ -13,24 +14,40 @@ import android.widget.Toast;
  */
 
 public class ScanHelperImpl implements Scan {
+    private Activity a;
     @Override
-    public void Scan(Activity a, Fragment f) {
-        f.startActivityForResult(getI(a), c);
+    public void Scan(Fragment f) {
+        f.startActivityForResult(getI(), c);
 }
 
+    public Activity getA() {
+        return this.a;
+    }
+
+    public ScanHelperImpl setA(Activity a) {
+        this.a = a;
+        return this;
+    }
+
     @Override
-    public void Scan(Activity a, android.app.Fragment f) {
-        f.startActivityForResult(getI(a), c);
+    public void Scan( android.app.Fragment f) {
+        f.startActivityForResult(getI(), c);
     }
 
     @NonNull
-    private Intent getI(Activity a) {
-        return new Intent(a, CaptureActivity.class);
+    private Intent getI() {
+        if (this.a==null){
+            Log.e("----log--err","a=null");
+        }
+        return new Intent(this.a, CaptureActivity.class);
     }
 
     @Override
-    public void Scan(Activity a) {
-        a.startActivityForResult(getI(a), c);
+    public void Scan() {
+        if (this.a==null){
+            Log.e("----log--err","a==null");
+        }
+        this.a.startActivityForResult(getI(), c);
     }
 
     @Override
@@ -44,18 +61,22 @@ public class ScanHelperImpl implements Scan {
         }
     }
     @Override
-    public void ScanPermissionsHelp(Activity a, int requestCode, String[] permissions, int[] grantResults, ScanPermission sp) {
+    public void ScanPermissionsHelp(int requestCode, String[] permissions, int[] grantResults, ScanPermission sp) {
         if (requestCode == Scan.c) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 if (sp!=null){
                     sp.ScaforSucceedResult(permissions,grantResults);
                 }
-                Scan(a);
+                if (getA()!=null){
+                this.Scan();
+                }
             } else {
                 if (sp!=null) {
                     sp.ScaforfaildResult(permissions, grantResults);
                 }else {
+                    if (a!=null){
                     Toast.makeText(a,"请在权限管理中设置“允许”使用相机",Toast.LENGTH_LONG).show();
+                    }
                 }
 
             }

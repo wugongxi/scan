@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <RelativeLayout
-        android:fitsSystemWindows="true"
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#161918"
         android:id="@+id/rl_camera"
-        android:background="#a90101"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:id="@+id/status_Bar"
+            android:layout_width="match_parent"
+            android:layout_height="00dp"/>
+
+    <RelativeLayout
+        android:id="@+id/titleBar"
+        android:background="#161918"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <TextView
-            android:textSize="18sp"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
-            android:text="扫描二维码/条形码"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
         <RelativeLayout
             android:fitsSystemWindows="true"
             android:id="@+id/rl_back"
@@ -22,13 +26,23 @@
             android:layout_height="50dp">
 
             <ImageView
-                android:src="@mipmap/arrow_white_left"
                 android:layout_centerInParent="true"
+                android:src="@mipmap/button_back_y"
                 android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="50dp"/>
         </RelativeLayout>
+        <TextView
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/common_theme1"
+            android:text="扫描二维码/条形码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </RelativeLayout>
+
+    </LinearLayout>
     <SurfaceView
         android:layout_below="@id/rl_camera"
         android:id="@+id/preview_view"
@@ -37,6 +51,7 @@
         android:layout_gravity="center" />
 
     <top.wgx.mscan.view.ViewfinderView
+        android:layout_marginTop="50dp"
         android:layout_below="@id/rl_camera"
         android:id="@+id/viewfinder_view"
         android:layout_width="wrap_content"

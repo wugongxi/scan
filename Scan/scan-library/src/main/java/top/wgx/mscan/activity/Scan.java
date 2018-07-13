@@ -10,9 +10,9 @@ import android.support.v4.app.Fragment;
 
 public interface Scan  {
     int c =  0x00001100;
-    void Scan(Activity a, Fragment f);
-    void Scan(Activity a, android.app.Fragment f);
-    void Scan(Activity a);
+    void Scan(Fragment f);
+    void Scan(android.app.Fragment f);
+    void Scan();
     void ScanHelp(int requestCode, int resultCode, Intent data, ScanforResult s);
-    void ScanPermissionsHelp(Activity a, int requestCode, String[] permissions, int[] grantResults, ScanPermission sp);
+    void ScanPermissionsHelp(int requestCode, String[] permissions, int[] grantResults, ScanPermission sp);
 }

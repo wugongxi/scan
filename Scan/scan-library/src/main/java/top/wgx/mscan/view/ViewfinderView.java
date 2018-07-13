@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.google.zxing.ResultPoint;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -141,9 +142,10 @@ public final class ViewfinderView extends View {
 
     public void drawText(Canvas canvas, Rect frame) {
         int width = canvas.getWidth();
-        paint.setColor(drawTextColor);
-        paint.setTextSize(drawTextSize);
         final float textWidth = paint.measureText(drawText);
+        paint.setColor(drawTextColor);
+        paint.setTextSize(new BigDecimal(width*0.66/14).floatValue());
+
         float x = (width - textWidth) / 2;
         float y = drawTextGravityBottom ? frame.bottom + drawTextMargin : frame.top - drawTextMargin*2;
         canvas.drawText(drawText, x, y, paint);
